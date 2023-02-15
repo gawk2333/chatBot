@@ -12,7 +12,7 @@ const server: Express = express();
 server.use(methodOverride("_method"));
 server.use(express.json());
 server.use(bodyParser.json());
-server.use(express.static(path.join(__dirname, "./public")));
+server.use(express.static(path.join(__dirname, "../../dist/app")));
 
 server.use("/api/v1/users", userRoute);
 

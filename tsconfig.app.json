@@ -1,7 +1,10 @@
 {
-  "extends":"tsconfig.json",
+  "extends":"./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist/app",
+    "module": "ESNext",
+    "inlineSourceMap": true,
+    "declaration": true,
+    "outDir": "dist/app",
     "target": "esnext",
     "noEmit": false,
 },
