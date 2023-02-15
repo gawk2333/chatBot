@@ -1,0 +1,9 @@
+{
+  "extends":"tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/app",
+    "target": "esnext",
+    "noEmit": false,
+},
+"include": ["./src/app/*"]
+}
