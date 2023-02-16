@@ -1,0 +1,10 @@
+.bodycontainer {
+  position: absolute;
+  margin:0 auto;
+  padding: 0;
+  width:100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(233, 233, 227);
+}

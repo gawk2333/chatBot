@@ -1,0 +1,10 @@
+.chatwindow{
+  margin:0;
+  margin-left:5px;
+  padding: 0;
+  height: 100%;
+  background-color: rgb(249, 238, 214);
+  border-radius: 8px;
+  box-shadow: 5px 1px 5px #424141;
+  flex:3;
+}

@@ -1,9 +1,13 @@
 import React from "react";
+import BodyContainer from "./components/BodyContainer";
+import "./App.css";
 
-function App () {
+function App() {
   return (
-    <div>App</div>
-  )
+    <>
+      <BodyContainer />
+    </>
+  );
 }
 
 export default App;

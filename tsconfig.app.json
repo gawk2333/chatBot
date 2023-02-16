@@ -7,6 +7,9 @@
     "outDir": "dist/app",
     "target": "esnext",
     "noEmit": false,
+    "plugins": [
+      { "name": "typescript-plugin-css-modules" }
+    ],
 },
 "include": ["./src/app/*"]
 }
