@@ -25,6 +25,7 @@
 .chatcontent {
   flex:10;
   margin:10px;
+  padding:5px 0;
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
 }
