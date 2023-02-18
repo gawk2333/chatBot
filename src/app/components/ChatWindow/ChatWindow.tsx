@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "semantic-ui-react";
 import TextareaAutosize from "react-textarea-autosize";
 import EachQA from "./components/EachQA";
@@ -13,11 +13,20 @@ import {
 import { useAppDispatch, useAppSelector, RootState } from "../../store";
 
 export default function ChatWindow() {
+  const chatBottomRef = useRef(null);
   const [content, setContent] = useState("");
   const dispatch = useAppDispatch();
   const chatState = useAppSelector((state: RootState) => {
     return state.chat;
   });
+
+  const scrollToBottom = () => {
+    (chatBottomRef.current as any).scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatState]);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent((e.target as any).value);
@@ -32,7 +41,6 @@ export default function ChatWindow() {
         created: Date.now() / 1000,
         choices: [],
       };
-      console.log("request", requestInfo);
       dispatch(saveQuestion(requestInfo));
       dispatch(getChatResponse(requestInfo));
     }
@@ -53,6 +61,7 @@ export default function ChatWindow() {
             );
           });
         })}
+        <div ref={chatBottomRef}></div>
       </div>
       <div className={styles.inputcontent}>
         <TextareaAutosize
