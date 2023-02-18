@@ -2,9 +2,11 @@ import request from "superagent";
 
 const url = "api/v1/chats";
 
-export const fetchQAChatApi = (requestInfo: JSON) => {
-  request
+export const fetchQAChatApi = async (requestInfo: Object) => {
+  return await request
     .post(`${url}/qa`)
     .send(requestInfo)
-    .then((response) => response.body);
+    .then((response) => {
+      return response.body;
+    });
 };

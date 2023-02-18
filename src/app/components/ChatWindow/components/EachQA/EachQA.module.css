@@ -1,5 +1,34 @@
 .eachqa {
   width: 100%;
-  height: 40px;
-  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  flex-wrap: nowrap;
+}
+
+.infobar {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.profileimg {
+  width: 30px;
+  height: 30px;
+  margin-left:10px;
+}
+
+.timelabel {
+  height: 30px;
+  padding-top: 5px;
+  padding-left: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  color: gray;
+}
+
+.textcontent {
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 10px;
 }

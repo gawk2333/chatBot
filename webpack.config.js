@@ -43,7 +43,7 @@ module.exports = {
       // this rule handles images
       {
         test: /\.jpe?g$|\.gif$|\.ico$|\.png$|\.svg$/,
-        use: "file-loader",
+        use: "url-loader",
       },
 
       // the following 3 rules handle font extraction
