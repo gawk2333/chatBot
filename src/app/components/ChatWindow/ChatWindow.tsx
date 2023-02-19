@@ -66,10 +66,11 @@ export default function ChatWindow() {
       <div className={styles.inputcontent}>
         <TextareaAutosize
           maxRows={5}
-          minRows={1.5}
+          minRows={1}
           className={styles.textinput}
           value={content}
           onChange={handleTextChange}
+          onHeightChange={scrollToBottom}
         />
         <div className={styles.sendbutton}>
           <Button primary onClick={handleSendButtonClick}>
