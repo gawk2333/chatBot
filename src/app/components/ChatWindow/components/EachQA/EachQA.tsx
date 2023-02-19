@@ -1,5 +1,4 @@
-import React from "react";
-import { Divider } from "semantic-ui-react";
+import React, { useMemo } from "react";
 import styles from "./EachQA.module.css";
 import { Image } from "semantic-ui-react";
 import userImageUrl from "../../../../user.jpeg";
@@ -14,17 +13,52 @@ export interface eachQAProps {
 
 export default function EachQA(props: eachQAProps) {
   const { sentBy, content, created } = props;
+
+  const eachQAStyle: Object = useMemo(() => {
+    return {
+      width: "100%",
+      paddingTop: "10px",
+      paddingBottom: "10px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      flexWrap: "nowrap",
+      backgroundColor: sentBy === "Bot" ? "#e7ffe7" : "#e8eafc",
+    };
+  }, [sentBy]);
+
+  const infoBarStyle: Object = useMemo(() => {
+    return {
+      width: "100%",
+      display: "flex",
+      flexDirection: sentBy === "Bot" ? "row" : "row-reverse",
+      justifyContent: "flex-start",
+      flexWrap: "nowrap",
+      // backgroundColor: sentBy === "Bot" ? "#f1f1f1" : "#c0c0c0",
+    };
+  }, [sentBy]);
+
+  const textContentStyle: Object = useMemo(() => {
+    return {
+      width: "100%",
+      paddingTop: "10px",
+      paddingLeft: "10px",
+      paddingRight: "10px",
+      display: "flex",
+      flexDirection: sentBy === "Bot" ? "row" : "row-reverse",
+    };
+  }, [sentBy]);
+
   return (
-    <div className={styles.eachqa}>
-      <div className={styles.infobar}>
+    <div style={eachQAStyle}>
+      <div style={infoBarStyle}>
         <Image
           src={sentBy === "Bot" ? botImageUrl : userImageUrl}
           className={styles.profileimg}
         />
         <div className={styles.timelabel}>{convertTimeStamp(created)}</div>
       </div>
-      <div className={styles.textcontent}>{content}</div>
-      <Divider />
+      <div style={textContentStyle}>{content}</div>
     </div>
   );
 }

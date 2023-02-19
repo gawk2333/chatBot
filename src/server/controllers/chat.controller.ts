@@ -23,7 +23,7 @@ export async function generateChatQA(req: Request, res: Response) {
   if (question.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Please enter a valid question",
       },
     });
     return;
@@ -42,7 +42,6 @@ export async function generateChatQA(req: Request, res: Response) {
     });
     res.status(200).json({ result: completion.data });
   } catch (error) {
-    console.log(error);
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
