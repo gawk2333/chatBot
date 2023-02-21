@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import styles from "./EachQA.module.css";
-import { Image, Loader } from "semantic-ui-react";
+import { Image } from "semantic-ui-react";
 import userImageUrl from "../../../../user.jpeg";
 import botImageUrl from "../../../../openai.jpeg";
 import { convertTimeStamp } from "../../../../../utils";
