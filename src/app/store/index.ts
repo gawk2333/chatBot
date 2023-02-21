@@ -3,6 +3,8 @@ import chatSlice from "./chatSlice";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import thunk, { ThunkDispatch } from "redux-thunk";
 import logger from "redux-logger";
+import { getEnvironment } from "../../utils";
+const environment = getEnvironment();
 
 export type AppThunkDispatch = ThunkDispatch<RootState, any, AnyAction>;
 export type RootState = ReturnType<typeof store.getState>;
@@ -13,6 +15,7 @@ export const store = configureStore({
     chat: chatSlice,
   },
   middleware: [thunk, logger] as const,
+  devTools: environment === "development" ? true : false,
 });
 
 export const useAppDispatch = () => useDispatch<AppThunkDispatch>();
