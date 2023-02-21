@@ -1,5 +1,5 @@
 import { AnyAction, configureStore } from "@reduxjs/toolkit";
-import { chatSlice } from "./reducers";
+import chatSlice from "./chatSlice";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import thunk, { ThunkDispatch } from "redux-thunk";
 import logger from "redux-logger";

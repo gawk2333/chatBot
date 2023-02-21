@@ -9,7 +9,7 @@ import {
   saveQuestion,
   chatItem,
   eachChoice,
-} from "../../reducers/chatSlice";
+} from "../../store/chatSlice";
 import { useAppDispatch, useAppSelector, RootState } from "../../store";
 
 export default function ChatWindow() {
