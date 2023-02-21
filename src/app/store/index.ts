@@ -2,7 +2,6 @@ import { AnyAction, configureStore } from "@reduxjs/toolkit";
 import chatSlice from "./chatSlice";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import thunk, { ThunkDispatch } from "redux-thunk";
-import logger from "redux-logger";
 import { getEnvironment } from "../../utils";
 const environment = getEnvironment();
 
@@ -14,7 +13,7 @@ export const store = configureStore({
   reducer: {
     chat: chatSlice,
   },
-  middleware: [thunk, logger] as const,
+  middleware: [thunk] as const,
   devTools: environment === "development" ? true : false,
 });
 
