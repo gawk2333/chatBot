@@ -7,6 +7,17 @@
   padding-left: 1em;
   padding-top: 0.5em;
   font-size: 1.5em;
+  float:left;
+}
+
+.setting {
+  float: right;
+  padding-top: 0.5em;
+  height: 40px;
+}
+
+.setting:hover {
+  cursor: pointer;
 }
 
 .header {
@@ -21,5 +32,4 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   box-shadow: 5px 1px 5px #424141;
-  display: flex;
 }
