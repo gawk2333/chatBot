@@ -14,6 +14,7 @@ export const getChatResponse = createAsyncThunk(
 export interface ChatState {
   id: null | string;
   chatInfo: chatItem[];
+  isLoading: boolean;
   updatedAt: number;
 }
 
@@ -21,7 +22,7 @@ export interface chatItem {
   id: string;
   sentBy: string;
   question?: string;
-  created: number;
+  created?: number;
   choices: Array<eachChoice>;
   model?: string;
   object?: string;
@@ -35,6 +36,7 @@ export interface eachChoice {
 const initialState: ChatState = {
   id: null,
   chatInfo: [],
+  isLoading: false,
   updatedAt: Date.now(),
 };
 
@@ -53,14 +55,19 @@ export const chatSlice = createSlice({
     builder.addCase(
       getChatResponse.fulfilled,
       (state, action: PayloadAction<chatItem>) => {
+        console.log("fullfilled", action);
         if (!state.id) {
           state.id = v4();
         }
         action.payload.sentBy = "Bot";
         state.chatInfo.push(action.payload);
+        state.isLoading = false;
         state.updatedAt = Date.now();
       }
     );
+    builder.addCase(getChatResponse.pending, (state, action) => {
+      state.isLoading = true;
+    });
   },
 });
 

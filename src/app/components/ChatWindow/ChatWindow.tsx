@@ -61,6 +61,7 @@ export default function ChatWindow() {
             );
           });
         })}
+        {chatState.isLoading && <EachQA sentBy={"Bot"} isLoading={true} />}
         <div ref={chatBottomRef}></div>
       </div>
       <div className={styles.inputcontent}>

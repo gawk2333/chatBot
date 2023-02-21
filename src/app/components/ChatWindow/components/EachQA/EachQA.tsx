@@ -1,18 +1,19 @@
 import React, { useMemo } from "react";
 import styles from "./EachQA.module.css";
-import { Image } from "semantic-ui-react";
+import { Image, Loader } from "semantic-ui-react";
 import userImageUrl from "../../../../user.jpeg";
 import botImageUrl from "../../../../openai.jpeg";
 import { convertTimeStamp } from "../../../../../utils";
 
 export interface eachQAProps {
   sentBy: string;
-  content: string | undefined;
-  created: number;
+  content?: string | undefined;
+  created?: number;
+  isLoading?: boolean;
 }
 
 export default function EachQA(props: eachQAProps) {
-  const { sentBy, content, created } = props;
+  const { sentBy, content, created, isLoading } = props;
 
   const eachQAStyle: Object = useMemo(() => {
     return {
@@ -56,9 +57,22 @@ export default function EachQA(props: eachQAProps) {
           src={sentBy === "Bot" ? botImageUrl : userImageUrl}
           className={styles.profileimg}
         />
-        <div className={styles.timelabel}>{convertTimeStamp(created)}</div>
+        {!isLoading && (
+          <div className={styles.timelabel}>{convertTimeStamp(created)}</div>
+        )}
       </div>
-      <div style={textContentStyle}>{content}</div>
+      {isLoading ? (
+        <div style={textContentStyle}>
+          <div className={styles.ldsellipsis}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      ) : (
+        <div style={textContentStyle}>{content}</div>
+      )}
     </div>
   );
 }
