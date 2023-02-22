@@ -11,12 +11,17 @@ import {
   eachChoice,
   ChatState,
 } from "../../../../store/chatSlice";
-import { useAppDispatch, useAppSelector, RootState } from "../../../../store";
+import {
+  useAppDispatch,
+  useAppSelector,
+  RootState,
+  AppThunkDispatch,
+} from "../../../../store";
 
 export default function ChatWindow() {
   const chatBottomRef = useRef(null);
   const [content, setContent] = useState("");
-  const dispatch = useAppDispatch();
+  const dispatch: AppThunkDispatch = useAppDispatch();
   const chatState: ChatState = useAppSelector((state: RootState) => {
     return state.chat;
   });
