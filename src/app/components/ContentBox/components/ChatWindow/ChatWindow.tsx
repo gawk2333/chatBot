@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Button } from "semantic-ui-react";
 import TextareaAutosize from "react-textarea-autosize";
 import EachQA from "./components/EachQA";
@@ -11,19 +11,23 @@ import {
   eachChoice,
   ChatState,
 } from "../../../../store/chatSlice";
+import { updateInput } from "../../../../store/pageSlice";
 import {
   useAppDispatch,
   useAppSelector,
   RootState,
   AppThunkDispatch,
 } from "../../../../store";
+import { PageState } from "../../../../store/pageSlice";
 
 export default function ChatWindow() {
   const chatBottomRef = useRef(null);
-  const [content, setContent] = useState("");
   const dispatch: AppThunkDispatch = useAppDispatch();
   const chatState: ChatState = useAppSelector((state: RootState) => {
     return state.chat;
+  });
+  const pageState: PageState = useAppSelector((state: RootState) => {
+    return state.page;
   });
 
   const scrollToBottom = () => {
@@ -35,14 +39,14 @@ export default function ChatWindow() {
   }, [chatState]);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent((e.target as any).value);
+    dispatch(updateInput((e.target as any).value));
   };
 
   const handleSendButtonClick = () => {
-    if (content) {
+    if (pageState.pages.chatWindowPage.chatInput) {
       const requestInfo: chatItem = {
         id: v4(),
-        question: content,
+        question: pageState.pages.chatWindowPage.chatInput,
         sentBy: "You",
         created: Date.now() / 1000,
         choices: [],
@@ -50,7 +54,7 @@ export default function ChatWindow() {
       dispatch(saveQuestion(requestInfo));
       dispatch(getChatResponse(requestInfo));
     }
-    setContent("");
+    dispatch(updateInput(""));
   };
 
   return (
@@ -75,7 +79,7 @@ export default function ChatWindow() {
           maxRows={5}
           minRows={1}
           className={styles.textinput}
-          value={content}
+          value={pageState.pages.chatWindowPage.chatInput}
           onChange={handleTextChange}
           onHeightChange={scrollToBottom}
         />
