@@ -9,6 +9,7 @@ import {
   saveQuestion,
   chatItem,
   eachChoice,
+  ChatState,
 } from "../../../../store/chatSlice";
 import { useAppDispatch, useAppSelector, RootState } from "../../../../store";
 
@@ -16,7 +17,7 @@ export default function ChatWindow() {
   const chatBottomRef = useRef(null);
   const [content, setContent] = useState("");
   const dispatch = useAppDispatch();
-  const chatState = useAppSelector((state: RootState) => {
+  const chatState: ChatState = useAppSelector((state: RootState) => {
     return state.chat;
   });
 

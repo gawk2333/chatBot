@@ -7,6 +7,12 @@ export const fetchQAChatApi = async (requestInfo: Object) => {
     .post(`${url}/qa`)
     .send(requestInfo)
     .then((response) => {
+      if (response.status !== 200) {
+        throw (
+          response.error ||
+          new Error(`Request failed with status ${response.status}`)
+        );
+      }
       return response.body;
     });
 };
