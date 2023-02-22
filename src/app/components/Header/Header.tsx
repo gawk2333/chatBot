@@ -7,7 +7,12 @@ import {
   AppDispatch,
   RootState,
 } from "../../store";
-import { addPage, removePage, PageState } from "../../store/pageSlice";
+import {
+  addPage,
+  removePage,
+  PageState,
+  pageTypes,
+} from "../../store/pageSlice";
 
 export default function Header() {
   const dispatch: AppDispatch = useAppDispatch();
@@ -16,10 +21,14 @@ export default function Header() {
   });
 
   const handleSettingClick = () => {
-    if (!pageState.currentPage.some((page: string) => page === "settingPage")) {
-      dispatch(addPage("settingPage"));
+    if (
+      !pageState.currentPage.some(
+        (page: pageTypes) => page === pageTypes.settingPage
+      )
+    ) {
+      dispatch(addPage(pageTypes.settingPage));
     } else {
-      dispatch(removePage("settingPage"));
+      dispatch(removePage(pageTypes.settingPage));
     }
   };
 

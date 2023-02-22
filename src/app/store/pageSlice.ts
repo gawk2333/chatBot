@@ -16,8 +16,13 @@ export interface ChatPageInfo {
   chatInput: string;
 }
 
+export enum pageTypes {
+  settingPage = "settingPage",
+  chatPage = "chatPage",
+}
+
 const initialState: PageState = {
-  currentPage: ["chatPage"],
+  currentPage: [pageTypes.chatPage],
   pages: [{ settingPage: {}, chatWindowPage: { chatInput: "" } }],
 };
 
@@ -25,11 +30,13 @@ export const pageSlice = createSlice({
   name: "page",
   initialState,
   reducers: {
-    addPage: (state, action: PayloadAction<string>) => {
+    addPage: (state, action: PayloadAction<pageTypes>) => {
       state.currentPage.push(action.payload);
     },
-    removePage: (state, action: PayloadAction<string>) => {
-      state.currentPage.filter((page: string) => page !== action.payload);
+    removePage: (state, action: PayloadAction<pageTypes>) => {
+      state.currentPage = state.currentPage.filter(
+        (page: pageTypes) => page !== action.payload
+      );
     },
   },
 });
