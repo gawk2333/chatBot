@@ -78,14 +78,14 @@ export default function SettingPage() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    // e.preventDefault();
-    if (e.key === "Tab") {
+    if (e.key === "Enter") {
       if (selectInputValue.length !== 0) {
         const stops: Array<string> = _.cloneDeep(
           pageState.pages.settingPage.chat.stop
         );
         stops.push(selectInputValue);
         handleValueChange(stops, "chat", "stop");
+        setSelectInputValue("");
       }
     }
   };
@@ -106,10 +106,11 @@ export default function SettingPage() {
             <Select
               options={selectOptions}
               value={selectOptions}
+              selectInputValue={selectInputValue}
               handleChange={(e) => handleSelectChange(e)}
               handleInputChange={(e) => handleInputChange(e)}
               handleKeyDown={(e) => handleKeyDown(e)}
-              noOptionsMessage="Enter a sequence and press Tab"
+              noOptionsMessage="Enter a sequence and press Enter"
             />
             <Form.Input
               label="temperature"

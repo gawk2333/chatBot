@@ -38,6 +38,7 @@ export interface selectProps {
   options: never[];
   value: Array<Object>;
   noOptionsMessage?: string | undefined;
+  selectInputValue?: string | undefined;
   handleInputChange?:
     | ((newValue: string, actionMeta: InputActionMeta) => void)
     | undefined;
@@ -51,6 +52,7 @@ export interface selectProps {
 export default function MinimalMultiSelect({
   options,
   value,
+  selectInputValue,
   handleInputChange,
   handleChange,
   handleKeyDown,
@@ -63,6 +65,7 @@ export default function MinimalMultiSelect({
       isClearable={false}
       options={options}
       value={value}
+      inputValue={selectInputValue}
       onChange={handleChange}
       onInputChange={handleInputChange}
       onKeyDown={handleKeyDown}
