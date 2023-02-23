@@ -6,6 +6,7 @@ import styles from "./BodyContainer.module.css";
 export default function BodyContainer() {
   const [height, setHeight] = useState<number>(0);
   useLayoutEffect(() => {
+    setHeight(window.innerHeight);
     window.addEventListener("resize", () => setHeight(window.innerHeight));
     return () =>
       window.removeEventListener("resize", () => setHeight(window.innerHeight));
