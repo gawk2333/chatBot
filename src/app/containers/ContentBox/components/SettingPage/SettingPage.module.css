@@ -1,0 +1,23 @@
+.settingpage {
+  margin:0;
+  margin-left:5px;
+  padding: 5px 20px;
+  height: 100%;
+  background-color: rgb(228, 252, 199);
+  border-radius: 8px;
+  box-shadow: 5px 1px 5px #424141;
+  width: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 260px;
+}
