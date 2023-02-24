@@ -20,7 +20,7 @@ export default function SettingPage() {
     return state.page;
   });
   const dispatch: AppDispatch = useAppDispatch();
-  const [showSettingPage, setShowSettingPage] = useState(false);
+  const [showSettingPage, setShowSettingPage] = useState<boolean>(false);
   const [selectOptions, setSelectOptions] = useState<any>([]);
   const [selectInputValue, setSelectInputValue] = useState<string>("");
 
@@ -49,7 +49,11 @@ export default function SettingPage() {
   type keyofChildSettingInfo = keyof ChildSettingInfo;
 
   const handleValueChange = (
-    e: React.ChangeEvent | number[] | number | string[],
+    e:
+      | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+      | number[]
+      | number
+      | string[],
     key: keyofSettingPageInfo,
     keyofChild: keyofChildSettingInfo
   ) => {
@@ -58,7 +62,7 @@ export default function SettingPage() {
       (payload[key][keyofChild] as number) = e;
     }
     if (typeof payload[key][keyofChild] === "string" && typeof e === "object") {
-      (payload[key][keyofChild] as string) = (e as any).target.velue;
+      (payload[key][keyofChild] as string) = (e as any).target.value;
     }
     if (typeof payload[key][keyofChild] === "object" && typeof e === "object") {
       (payload[key][keyofChild] as any) = e;

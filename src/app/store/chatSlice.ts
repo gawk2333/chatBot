@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchQAChatApi } from "../api/chatApi";
+import { ChildSettingInfo } from "./pageSlice";
 import { v4 } from "uuid";
 
 export const getChatResponse = createAsyncThunk(
   "chat/updateChatContent",
-  async (requestInfo: Object, thunkAPI) => {
+  async (requestInfo: chatItem, thunkAPI) => {
     const response = await fetchQAChatApi(requestInfo);
     return response.result;
   }
@@ -27,6 +28,7 @@ export interface chatItem {
   model?: string;
   object?: string;
   usage?: Record<string, number>;
+  completionSetting?: ChildSettingInfo;
 }
 
 export interface eachChoice {
@@ -55,7 +57,6 @@ export const chatSlice = createSlice({
     builder.addCase(
       getChatResponse.fulfilled,
       (state, action: PayloadAction<chatItem>) => {
-        console.log("fullfilled", action);
         if (!state.id) {
           state.id = v4();
         }

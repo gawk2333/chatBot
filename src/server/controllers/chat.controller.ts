@@ -29,16 +29,18 @@ export async function generateChatQA(req: Request, res: Response) {
     return;
   }
 
-  try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(question),
-      temperature: 0,
-      max_tokens: 2048,
-      frequency_penalty: 0.0,
-      presence_penalty: 0.0,
-      stop: ["Human:", "AI:"],
+  const setting = req.body.completionSetting;
+  if (!setting) {
+    res.status(400).json({
+      error: {
+        message: "Completion setting error.",
+      },
     });
+  }
+
+  setting.prompt = `${setting.prompt}${question}`;
+  try {
+    const completion = await openai.createCompletion(setting);
     res.status(200).json({ result: completion.data });
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
@@ -54,13 +56,4 @@ export async function generateChatQA(req: Request, res: Response) {
       });
     }
   }
-}
-
-function generatePrompt(question: string) {
-  return `The following is a conversation with an AI assistant. The assistant is helpful,creative,
-    clever, and very friendly.
-    Human: Hello, who are you?
-    AI: I am an AI created by open AI. How can I help today?
-    Human:${question}.
-    AI:`;
 }

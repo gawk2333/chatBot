@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Button } from "semantic-ui-react";
+import _ from "lodash";
 import TextareaAutosize from "react-textarea-autosize";
 import EachQA from "./components/EachQA";
 import styles from "./ChatWindow.module.css";
@@ -44,13 +45,16 @@ export default function ChatWindow() {
 
   const handleSendButtonClick = () => {
     if (pageState.pages.chatWindowPage.chatInput) {
+      const completionSetting = _.cloneDeep(pageState.pages.settingPage.chat);
       const requestInfo: chatItem = {
         id: v4(),
         question: pageState.pages.chatWindowPage.chatInput,
         sentBy: "You",
         created: Date.now() / 1000,
         choices: [],
+        completionSetting,
       };
+      console.log(requestInfo);
       dispatch(saveQuestion(requestInfo));
       dispatch(getChatResponse(requestInfo));
     }

@@ -1,8 +1,9 @@
 import request from "superagent";
+import { chatItem } from "../store/chatSlice";
 
 const url = "api/v1/chats";
 
-export const fetchQAChatApi = async (requestInfo: Object) => {
+export const fetchQAChatApi = async (requestInfo: chatItem) => {
   return await request
     .post(`${url}/qa`)
     .send(requestInfo)
