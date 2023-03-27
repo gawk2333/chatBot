@@ -97,7 +97,7 @@ export default function SettingPage() {
   const panes = [
     {
       menuItem: (
-        <Menu.Item>
+        <Menu.Item key="completion">
           <Popup
             content={() => <div>Completion</div>}
             trigger={<Icon name="edit" />}
@@ -105,7 +105,7 @@ export default function SettingPage() {
         </Menu.Item>
       ),
       render: () => (
-        <Tab.Pane>
+        <Tab.Pane key="tab1">
           <Form>
             <Form.TextArea
               label="prompt"
@@ -113,7 +113,7 @@ export default function SettingPage() {
               value={pageState.pages.settingPage.chat.prompt}
               onChange={(e) => handleValueChange(e, "chat", "prompt")}
             />
-            <span>Stop sequence</span>
+            {/* <span>Stop sequence</span> */}
             {/* <Select
               options={selectOptions}
               value={selectOptions}
@@ -182,8 +182,14 @@ export default function SettingPage() {
         </Tab.Pane>
       ),
     },
-    { menuItem: "Tab 2", render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
-    { menuItem: "Tab 3", render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+    {
+      menuItem: "Tab 2",
+      render: () => <Tab.Pane key="tab2">Tab 2 Content</Tab.Pane>,
+    },
+    {
+      menuItem: "Tab 3",
+      render: () => <Tab.Pane key="tab3">Tab 3 Content</Tab.Pane>,
+    },
   ];
 
   return (
