@@ -9,6 +9,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export async function generateChatQA(req: Request, res: Response) {
+  console.log(req.body.completionSetting);
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -38,7 +39,8 @@ export async function generateChatQA(req: Request, res: Response) {
     });
   }
 
-  setting.prompt = `${setting.prompt}${question}`;
+  setting.prompt = `${setting.prompt}${question} AI:`;
+  console.log(setting.prompt);
   try {
     const completion = await openai.createCompletion(setting);
     res.status(200).json({ result: completion.data });

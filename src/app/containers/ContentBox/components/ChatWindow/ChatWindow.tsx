@@ -43,18 +43,35 @@ export default function ChatWindow() {
     dispatch(updateInput((e.target as any).value));
   };
 
+  const updatePrompt = (question: string): string => {
+    const originPrompt = _.cloneDeep(pageState.pages.settingPage.chat.prompt);
+    const chatHistoryArr = chatState.chatInfo.map((chat) => {
+      return `${chat.sentBy}:${chat.choices[0].text}`;
+    });
+    let chatHistory;
+    if (chatHistoryArr.length === 0) {
+      chatHistory = `Human:${question} `;
+    } else {
+      chatHistory = chatHistoryArr?.reduce((prev, cur) => {
+        return prev + " " + cur;
+      });
+    }
+    return `${originPrompt} ${chatHistory}`;
+  };
+
   const handleSendButtonClick = () => {
     if (pageState.pages.chatWindowPage.chatInput) {
       const completionSetting = _.cloneDeep(pageState.pages.settingPage.chat);
+      const question = pageState.pages.chatWindowPage.chatInput;
+      completionSetting.prompt = updatePrompt(question);
       const requestInfo: chatItem = {
         id: v4(),
-        question: pageState.pages.chatWindowPage.chatInput,
-        sentBy: "You",
+        sentBy: "Human",
+        question,
         created: Date.now() / 1000,
         choices: [],
         completionSetting,
       };
-      console.log(requestInfo);
       dispatch(saveQuestion(requestInfo));
       dispatch(getChatResponse(requestInfo));
     }
@@ -75,7 +92,7 @@ export default function ChatWindow() {
             );
           });
         })}
-        {chatState.isLoading && <EachQA sentBy={"Bot"} isLoading={true} />}
+        {chatState.isLoading && <EachQA sentBy={"AI"} isLoading={true} />}
         <div ref={chatBottomRef}></div>
       </div>
       <div className={styles.inputcontent}>

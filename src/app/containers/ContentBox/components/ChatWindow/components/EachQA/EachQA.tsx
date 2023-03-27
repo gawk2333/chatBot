@@ -24,7 +24,7 @@ export default function EachQA(props: eachQAProps) {
       flexDirection: "column",
       justifyContent: "flex-start",
       flexWrap: "nowrap",
-      backgroundColor: sentBy === "Bot" ? "#e7ffe7" : "#e8eafc",
+      backgroundColor: sentBy === "AI" ? "#e7ffe7" : "#e8eafc",
     };
   }, [sentBy]);
 
@@ -32,10 +32,10 @@ export default function EachQA(props: eachQAProps) {
     return {
       width: "100%",
       display: "flex",
-      flexDirection: sentBy === "Bot" ? "row" : "row-reverse",
+      flexDirection: sentBy === "AI" ? "row" : "row-reverse",
       justifyContent: "flex-start",
       flexWrap: "nowrap",
-      // backgroundColor: sentBy === "Bot" ? "#f1f1f1" : "#c0c0c0",
+      // backgroundColor: sentBy === "AI" ? "#f1f1f1" : "#c0c0c0",
     };
   }, [sentBy]);
 
@@ -46,7 +46,7 @@ export default function EachQA(props: eachQAProps) {
       paddingLeft: "10px",
       paddingRight: "10px",
       display: "flex",
-      flexDirection: sentBy === "Bot" ? "row" : "row-reverse",
+      flexDirection: sentBy === "AI" ? "row" : "row-reverse",
     };
   }, [sentBy]);
 
@@ -54,7 +54,7 @@ export default function EachQA(props: eachQAProps) {
     <div style={eachQAStyle}>
       <div style={infoBarStyle}>
         <Image
-          src={sentBy === "Bot" ? botImageUrl : userImageUrl}
+          src={sentBy === "AI" ? botImageUrl : userImageUrl}
           className={styles.profileimg}
         />
         {!isLoading && (

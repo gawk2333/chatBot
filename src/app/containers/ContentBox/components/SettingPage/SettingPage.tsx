@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Transition, Form, Tab } from "semantic-ui-react";
+import React, { useState, useEffect } from "react";
+import { Transition, Form, Tab, Icon, Menu, Popup } from "semantic-ui-react";
 import Slider from "rc-slider";
-import Select from "../../../../components/MinimalMultiSelect";
+// import Select from "../../../../components/MinimalMultiSelect";
 import _ from "lodash";
 import "rc-slider/assets/index.css";
 import styles from "./SettingPage.module.css";
@@ -13,7 +13,7 @@ import {
   ChildSettingInfo,
   updateSettingContent,
 } from "../../../../store/pageSlice";
-import { MultiValue } from "react-select";
+// import { MultiValue } from "react-select";
 
 export default function SettingPage() {
   const pageState: PageState = useAppSelector((state) => {
@@ -21,23 +21,23 @@ export default function SettingPage() {
   });
   const dispatch: AppDispatch = useAppDispatch();
   const [showSettingPage, setShowSettingPage] = useState<boolean>(false);
-  const [selectOptions, setSelectOptions] = useState<any>([]);
-  const [selectInputValue, setSelectInputValue] = useState<string>("");
+  // const [selectOptions, setSelectOptions] = useState<any>([]);
+  // const [selectInputValue, setSelectInputValue] = useState<string>("");
 
-  const getStopOptions = useCallback(() => {
-    const stops = _.cloneDeep(pageState.pages.settingPage.chat.stop);
-    const stopOptions = stops.map((s) => {
-      return {
-        label: s,
-        value: s,
-      };
-    });
-    setSelectOptions(stopOptions as never[]);
-  }, [pageState.pages.settingPage.chat.stop]);
+  // const getStopOptions = useCallback(() => {
+  //   const stops = _.cloneDeep(pageState.pages.settingPage.chat.stop);
+  //   const stopOptions = stops.map((s) => {
+  //     return {
+  //       label: s,
+  //       value: s,
+  //     };
+  //   });
+  //   setSelectOptions(stopOptions as never[]);
+  // }, [pageState.pages.settingPage.chat.stop]);
 
-  useEffect(() => {
-    getStopOptions();
-  }, [getStopOptions]);
+  // useEffect(() => {
+  //   getStopOptions();
+  // }, [getStopOptions]);
 
   useEffect(() => {
     setShowSettingPage(
@@ -70,33 +70,40 @@ export default function SettingPage() {
     dispatch(updateSettingContent(payload));
   };
 
-  const handleInputChange = (value: string) => {
-    setSelectInputValue(value);
-  };
+  // const handleInputChange = (value: string) => {
+  //   setSelectInputValue(value);
+  // };
 
-  const handleSelectChange = (items: MultiValue<string>) => {
-    const valueForUpdate = items.map((item) => {
-      return (item as any).value;
-    });
-    handleValueChange(valueForUpdate, "chat", "stop");
-  };
+  // const handleSelectChange = (items: MultiValue<string>) => {
+  //   const valueForUpdate = items.map((item) => {
+  //     return (item as any).value;
+  //   });
+  //   handleValueChange(valueForUpdate, "chat", "stop");
+  // };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      if (selectInputValue.length !== 0) {
-        const stops: Array<string> = _.cloneDeep(
-          pageState.pages.settingPage.chat.stop
-        );
-        stops.push(selectInputValue);
-        handleValueChange(stops, "chat", "stop");
-        setSelectInputValue("");
-      }
-    }
-  };
+  // const handleKeyDown = (e: React.KeyboardEvent) => {
+  //   if (e.key === "Enter") {
+  //     if (selectInputValue.length !== 0) {
+  //       const stops: Array<string> = _.cloneDeep(
+  //         pageState.pages.settingPage.chat.stop
+  //       );
+  //       stops.push(selectInputValue);
+  //       handleValueChange(stops, "chat", "stop");
+  //       setSelectInputValue("");
+  //     }
+  //   }
+  // };
 
   const panes = [
     {
-      menuItem: "Text",
+      menuItem: (
+        <Menu.Item>
+          <Popup
+            content={() => <div>Completion</div>}
+            trigger={<Icon name="edit" />}
+          ></Popup>
+        </Menu.Item>
+      ),
       render: () => (
         <Tab.Pane>
           <Form>
@@ -107,7 +114,7 @@ export default function SettingPage() {
               onChange={(e) => handleValueChange(e, "chat", "prompt")}
             />
             <span>Stop sequence</span>
-            <Select
+            {/* <Select
               options={selectOptions}
               value={selectOptions}
               selectInputValue={selectInputValue}
@@ -115,7 +122,7 @@ export default function SettingPage() {
               handleInputChange={(e) => handleInputChange(e)}
               handleKeyDown={(e) => handleKeyDown(e)}
               noOptionsMessage="Enter a sequence and press Enter"
-            />
+            /> */}
             <Form.Input
               label="temperature"
               value={pageState.pages.settingPage.chat.temperature}

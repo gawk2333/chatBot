@@ -40,7 +40,7 @@ const initialState: PageState = {
     settingPage: {
       chat: {
         model: "text-davinci-003",
-        prompt: generatePrompt("Hello"),
+        prompt: generatePrompt(),
         temperature: 0,
         max_tokens: 2048,
         frequency_penalty: 0.0,
@@ -49,7 +49,7 @@ const initialState: PageState = {
       },
       image: {
         model: "text-davinci-003",
-        prompt: generatePrompt("Hello"),
+        prompt: generatePrompt(),
         temperature: 0,
         max_tokens: 2048,
         frequency_penalty: 0.0,
@@ -76,19 +76,16 @@ export const pageSlice = createSlice({
         (page: pageTypes) => page !== action.payload
       );
     },
+    // for setting page update
     updateSettingContent: (state, action: PayloadAction<SettingPageInfo>) => {
       state.pages.settingPage = action.payload;
     },
   },
 });
 
-function generatePrompt(question: string) {
+function generatePrompt() {
   return `The following is a conversation with an AI assistant. The assistant is helpful,creative,
-    clever, and very friendly.
-    Human: Hello, who are you?
-    AI: I am an AI created by open AI. How can I help today?
-    Human:${question}.
-    AI:`;
+    clever, and very friendly.`;
 }
 // Action creators are generated for each case reducer function
 export const { addPage, removePage, updateInput, updateSettingContent } =

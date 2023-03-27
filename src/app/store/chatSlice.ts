@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { updateSettingContent } from "./pageSlice";
 import { fetchQAChatApi } from "../api/chatApi";
 import { ChildSettingInfo } from "./pageSlice";
 import { v4 } from "uuid";
@@ -60,7 +61,7 @@ export const chatSlice = createSlice({
         if (!state.id) {
           state.id = v4();
         }
-        action.payload.sentBy = "Bot";
+        action.payload.sentBy = "AI";
         state.chatInfo.push(action.payload);
         state.isLoading = false;
         state.updatedAt = Date.now();
